@@ -1,0 +1,29 @@
+[project]
+name = "kalamanvani"
+version = "0.1.0"
+description = "Voice-first UPSC tutoring agent powered by LangGraph, RAG, and Indian-native STT/TTS"
+requires-python = ">=3.10"
+dependencies = [
+    "chromadb>=0.5.0",
+    "sentence-transformers>=3.0.0",
+    "rank-bm25>=0.2.2",
+    "langchain>=0.3.0",
+    "langchain-text-splitters>=0.3.0",
+    "langchain-community>=0.3.0",
+    "langgraph>=0.4.0",
+    "langchain-google-genai>=1.0.0",
+    "google-genai>=1.0.0",
+    "gradio>=5.0.0",
+    "pydub>=0.25.1",
+    "pytest>=8.0.0",
+    "httpx>=0.27.0",
+    "pdfplumber>=0.10.0",
+]
+
+[project.optional-dependencies]
+sarvam = [
+    "sarvamai>=0.1.0",
+]
+
+[tool.pytest.ini_options]
+testpaths = ["evals"]

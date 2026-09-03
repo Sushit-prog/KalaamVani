@@ -1,0 +1,72 @@
+[
+  {
+    "query_id": "RET-001",
+    "query": "Under Article 14, what is the State prohibited from denying to any person within the territory of India?",
+    "expected_chunk_id": "art14_chunk_001",
+    "expected_keywords": ["equality before law", "equal protection", "State", "person"],
+    "source": "Constitution Art. 14"
+  },
+  {
+    "query_id": "RET-002",
+    "query": "How does Article 55 secure uniformity in the scale of representation of the States at the election of the President?",
+    "expected_chunk_id": "art55_chunk_001",
+    "expected_keywords": ["uniformity", "representation", "States", "election of the President", "single transferable vote"],
+    "source": "Constitution Art. 55"
+  },
+  {
+    "query_id": "RET-003",
+    "query": "What is the procedure for constitutional amendments?",
+    "expected_chunk_id": "art368_chunk_001",
+    "expected_keywords": ["special majority", "ratification"],
+    "source": "Constitution Art. 368"
+  },
+  {
+    "query_id": "RET-004",
+    "query": "Under Article 21, when can a person be deprived of his life or personal liberty?",
+    "expected_chunk_id": "art21_chunk_001",
+    "expected_keywords": ["life", "personal liberty", "person", "procedure established by law"],
+    "source": "Constitution Art. 21"
+  },
+  {
+    "query_id": "RET-005",
+    "query": "Under Article 36, what meaning does the expression \"the State\" have within Part IV?",
+    "expected_chunk_id": "art36_chunk_001",
+    "expected_keywords": ["State", "Part III", "same meaning", "definition"],
+    "source": "Constitution Art. 36"
+  },
+  {
+    "query_id": "RET-006",
+    "query": "How does Parliament pass a money bill?",
+    "expected_chunk_id": "art110_chunk_001",
+    "expected_keywords": ["money bill", "Lok Sabha", "Speaker"],
+    "source": "Constitution Art. 110"
+  },
+  {
+    "query_id": "RET-007",
+    "query": "What happens to laws that are inconsistent with or in derogation of the fundamental rights under Article 13?",
+    "expected_chunk_id": "art13_chunk_001",
+    "expected_keywords": ["inconsistent", "derogation", "void", "fundamental rights"],
+    "source": "Constitution Art. 13"
+  },
+  {
+    "query_id": "RET-008",
+    "query": "Under what conditions can a national emergency be declared?",
+    "expected_chunk_id": "art352_chunk_001",
+    "expected_keywords": ["emergency", "war", "external aggression"],
+    "source": "Constitution Art. 352"
+  },
+  {
+    "query_id": "RET-009",
+    "query": "What are the Fundamental Duties of Indian citizens?",
+    "expected_chunk_id": "art51A_chunk_001",
+    "expected_keywords": ["fundamental duties", "42nd Amendment", "Part IVA"],
+    "source": "Constitution Art. 51A"
+  },
+  {
+    "query_id": "RET-010",
+    "query": "What is the role of the Governor in state administration?",
+    "expected_chunk_id": "art154_chunk_001",
+    "expected_keywords": ["governor", "executive power", "state"],
+    "source": "Constitution Art. 154"
+  }
+]

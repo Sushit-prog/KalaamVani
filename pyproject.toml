@@ -13,7 +13,7 @@ dependencies = [
     "langgraph>=0.4.0",
     "langchain-google-genai>=1.0.0",
     "google-genai>=1.0.0",
-    "gradio>=5.0.0",
+    "gradio>=6.0.0,<7.0.0",
     "pydub>=0.25.1",
     "pytest>=8.0.0",
     "httpx>=0.27.0",
@@ -24,6 +24,9 @@ dependencies = [
 sarvam = [
     "sarvamai>=0.1.0",
 ]
+
+[project.scripts]
+kalamanvani = "ui.app:main"
 
 [tool.pytest.ini_options]
 testpaths = ["evals"]

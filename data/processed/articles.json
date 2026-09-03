@@ -1037,11 +1037,9 @@
       "President",
       "Constituent Assembly"
     ],
-    "provenance": "fetched_from_wikisource",
-    "source_url": "https://en.wikisource.org/wiki/Constitution_of_India_(2020)/Part_XXI",
-    "fetched_at": "2026-09-03T14:24:49.229551+00:00",
+    "provenance": "curated_not_verified",
     "current_as_of": "2020-09-09",
     "amendment_cutoff": "Constitution (One Hundred and Fourth Amendment) Act, 2019",
-    "note": "Static Wikisource snapshot dated 9 September 2020; amendments after the 104th Amendment Act (2019) are not reflected"
+    "note": "DEMOTED from fetched_from_wikisource: the Wikisource \"Constitution of India (2020)\" part XXI page carries the PRE-abrogation (1950) text of Article 370 (Maharaja / Instrument of Accession), which does NOT reflect the Constitution (Application to Jammu and Kashmir) Order, 2019 (C.O. 272, 6 Aug 2019) or the J&K Reorganisation Act, 2019 (31 Oct 2019). Neither India Code (indiacode.gov.in, JS SPA) nor legislative.gov.in (JS stub) was mechanically fetchable for the corrected verbatim text, so this article is retained for corpus breadth ONLY and is NOT eligible as MCQ ground truth (never a source_chunk_id)."
   }
 ]

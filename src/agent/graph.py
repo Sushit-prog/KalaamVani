@@ -48,32 +48,72 @@ def _build_llm():
             model="gemini-2.0-flash",
             api_key=api_key,
         )
-    # Fallback: a minimal deterministic model suitable for CLI/testing without
-    # an API key. It echoes the latest assistant tool intent.
-    return _EchoModel()
+    # Fallback: a deterministic, corpus-grounded, template-based model used
+    # when no API key is present. It performs real retrieval and marks itself
+    # as a no-LLM fallback so it can never be mistaken for Gemini output.
+    return _GroundedFallbackModel()
 
 
-class _EchoModel:
+class _GroundedFallbackModel:
     """No-API-key fallback chat model for the graph.
 
-    It cannot generate real prose, but it keeps the graph runnable and returns
-    a helpful message so the CLI/transcript pipeline works without an API key.
+    Unlike a plain echo stub, this model:
+      - performs actual corpus retrieval via query_constitution
+      - returns a grounded, Socratic-flavoured response composed from the
+        retrieved chunks (citing source + provenance and posing one follow-up
+        question), so a no-key demo shows real grounded output
+      - is clearly labeled as a TEMPLATE FALLBACK (no LLM), so the degraded
+        mode is honestly distinguishable from real Gemini output
     """
+
+    MARKER = "[TEMPLATE FALLBACK — no LLM]"
 
     def bind_tools(self, *args, **kwargs):
         return self
 
     def invoke(self, messages, *args, **kwargs):
-        # Route to tool when tool output is present and helpful.
-        texts = [m.content for m in messages if hasattr(m, "content") and m.content]
-        last = texts[-1] if texts else ""
-        return AIMessage(
-            content=(
-                "I've retrieved relevant material. (Fallback model: set "
-                "GEMINI_API_KEY to enable full Socratic tutoring.)\n\n"
-                f"{last}"
+        from src.agent.tools import query_constitution
+
+        # Grab the latest user question (last Human message).
+        question = ""
+        for m in messages:
+            if getattr(m, "type", "") == "human" and getattr(m, "content", None):
+                question = str(m.content).strip()
+        if not question:
+            return AIMessage(
+                content=(
+                    f"{self.MARKER} I need a question from you to search the "
+                    "corpus. What would you like to understand about the "
+                    "Constitution?"
+                )
             )
+
+        results = query_constitution.invoke(question)
+        if not results:
+            return AIMessage(
+                content=(
+                    f"{self.MARKER} I could not find grounded material for "
+                    f"'{question}' in the corpus. (Set GEMINI_API_KEY for full "
+                    "Socratic tutoring.)"
+                )
+            )
+
+        # Compose a grounded, Socratic-flavoured response from retrieved chunks.
+        lines = [
+            f"{self.MARKER} Here is grounded material retrieved from the corpus "
+            f'for: "{question}"',
+            "",
+        ]
+        for i, r in enumerate(results[:2], 1):
+            lines.append(f"({i}) {r.get('source', 'source')}")
+            lines.append(f"    {r.get('text', '')[:500]}")
+            lines.append("")
+        lines.append(
+            "Given this, what do you think is the key principle at play here, "
+            "and how would you explain it in your own words? "
+            "(Set GEMINI_API_KEY for full Socratic tutoring.)"
         )
+        return AIMessage(content="\n".join(lines))
 
 
 def build_graph():
